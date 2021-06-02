@@ -15,6 +15,6 @@ public class HandleParquetFile {
 		SparkSession spark = SparkSession.builder().appName("Write file parquet to HDFS").getOrCreate();
 		
 		Dataset<Row> listModelLogDF = spark.createDataFrame(list, Product.class);
-		listModelLogDF.write().parquet("hdfs://127.0.0.1:9000/tiki");
+		listModelLogDF.write().mode("append").parquet("hdfs://127.0.0.1:9000/tiki");
 	}
 }

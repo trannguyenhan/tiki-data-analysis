@@ -55,6 +55,7 @@ public class SparkStreamingReadDataDemo {
         			
         			if(listProducts.size() == 100) { // if reach threshold, save to hadoop HDFS parquet file and clear
         				handle.saveToHDFSParquetFile(listProducts);
+        				System.out.println("SAVED");
         				listProducts.clear();
         			}
         			

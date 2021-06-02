@@ -11,7 +11,7 @@ public class KafkaProperties {
 		Properties prop = new Properties();
 		prop.put("bootstrap.servers", "localhost:9092");
 		prop.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		prop.put("value.serializer", "models.serializer.ProductSerializer");
+		prop.put("value.serializer", "models.closeable.ProductSerializer");
 		
 		return prop;
 	}
