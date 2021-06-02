@@ -53,7 +53,7 @@ public class SparkStreamingReadDataDemo {
         			Product product = new Gson().fromJson(l, Product.class);
         			listProducts.add(product);
         			
-        			if(listProducts.size() == 100) { // if reach threshold, save to hadoop HDFS parquet file and clear
+        			if(listProducts.size() == 5000) { // if reach threshold, save to hadoop HDFS parquet file and clear
         				handle.saveToHDFSParquetFile(listProducts);
         				System.out.println("SAVED");
         				listProducts.clear();
