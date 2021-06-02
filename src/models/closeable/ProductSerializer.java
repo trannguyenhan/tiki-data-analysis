@@ -1,4 +1,4 @@
-package models.serializer;
+package models.closeable;
 
 import org.apache.kafka.common.serialization.Serializer;
 

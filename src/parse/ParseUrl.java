@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 
 import models.Data;
 
-public class ParseUrl implements ParseObject{
+public class ParseUrl implements IParseObject{
 	private String path;
 	
 	public ParseUrl() {

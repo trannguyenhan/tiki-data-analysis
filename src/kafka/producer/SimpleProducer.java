@@ -4,15 +4,17 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import kafka.ITaskProducer;
+import kafka.properties.KafkaProperties;
 import models.Product;
-import models.properties.KafkaProperties;
 
-public class SimpleProducer {
+public class SimpleProducer implements ITaskProducer {
 	public Producer<String, Product> producer;
 	
 	/**
 	 * Open Producer 
 	 */
+	@Override
 	public void open() {
 		producer = new KafkaProducer<String, Product>(KafkaProperties.getInstance());
 	}
@@ -21,6 +23,7 @@ public class SimpleProducer {
 	 * Send Product to topic of kafka
 	 * @param product
 	 */
+	@Override
 	public void send(String topic, Product product) {
 		if(product == null) {
 			throw new NullPointerException("Producer no initialization");
@@ -33,6 +36,7 @@ public class SimpleProducer {
 	/**
 	 * Close Producer 
 	 */
+	@Override
 	public void close() {
 		producer.close();
 	}

@@ -1,4 +1,4 @@
-package models.properties;
+package kafka.properties;
 
 import java.util.Properties;
 

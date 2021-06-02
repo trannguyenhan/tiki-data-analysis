@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import models.Data;
 
-public class ParseData implements ParseObject{
+public class ParseData implements IParseObject{
 	private int category;
 	private int page;
 	
@@ -25,5 +25,11 @@ public class ParseData implements ParseObject{
 		ParseUrl parseUrl = new ParseUrl(url);
 		
 		return parseUrl.getData();
+	}
+	
+	// set category and page
+	public void set(int category, int page) {
+		this.category = category;
+		this.page = page;
 	}
 }

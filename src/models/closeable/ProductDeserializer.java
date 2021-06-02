@@ -1,4 +1,4 @@
-package models.deserializer;
+package models.closeable;
 
 import java.io.IOException;
 
