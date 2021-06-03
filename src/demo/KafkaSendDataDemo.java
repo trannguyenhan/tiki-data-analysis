@@ -40,6 +40,7 @@ public class KafkaSendDataDemo {
 				
 				producer.open();
 				for(Product product : list) {
+					product.setCategory(ca); // set category of product is URL when crawl
 					producer.send("hello-kafka", product);
 				}
 				

@@ -158,6 +158,17 @@ public class Product implements Serializable{
 	@SerializedName("quantity_sold")
 	private QuantitySold quantitySold;
 
+	// category get in URL when crawl data from API
+	private int category;
+	
+	public int getCategory() {
+		return category;
+	}
+	
+	public void setCategory(int category) {
+		this.category = category;
+	}
+	
 	public int getId() {
 		return id;
 	}
