@@ -17,6 +17,7 @@ public class ParseData implements IParseObject{
 		this.page = page;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Data getData() throws IOException {
 		String url = "https://tiki.vn/api/v2/products?limit=50&include=advertisement&aggregations=1&category=" 
 				+ this.category + "&page="

@@ -19,11 +19,19 @@ public class ParseUrl implements IParseObject{
 		this.path = path;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Data getData() throws IOException {
 		URL url = new URL(path);
 		InputStreamReader input = new InputStreamReader(url.openStream());
+		Data data = null;
 		
-		Data data = new Gson().fromJson(input, Data.class);
+		try {
+			// you will be blocked because the confirmation is robot, you will return null if this is the case
+			data = new Gson().fromJson(input, Data.class);
+		} catch (Exception e) {
+			return null;
+		}
+		
 		
 		return data;
 	}

@@ -30,10 +30,10 @@ public class SparkStreamingReadDataDemo {
 		
 		// Create a local StreamingContext and batch interval of 10 second
         SparkConf conf = new SparkConf().setMaster("local").setAppName("Kafka Spark Integration");
-        JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(10));
+        JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(1));
 
         // Define a list of Kafka topic to subscribe
-        Collection<String> topics = Arrays.asList("hello-kafka");
+        Collection<String> topics = Arrays.asList("tiki-read-data-1");
 
         // Create an input DStream which consume message from Kafka topics
         JavaInputDStream<ConsumerRecord<String, String>> stream;

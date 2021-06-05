@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import kafka.ITaskProducer;
 import kafka.producer.SimpleProducer;
 import models.Product;
 import parse.ParseData;
 
 public class KafkaSendDataDemo {
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 		// get category of tiki
 		Scanner sc = new Scanner(new File("resource/tiki_cate.csv"));
 		sc.useDelimiter("\n");
@@ -22,29 +23,37 @@ public class KafkaSendDataDemo {
 		while(sc.hasNext()) {
 			listCategories.add(Integer.parseInt(sc.next().split(",")[1]));
 		}
+		int sizeOfCategory = listCategories.size();
 		
 		// create parse object
 		ParseData parse = new ParseData();
-		SimpleProducer producer = new SimpleProducer();
+		ITaskProducer producer = new SimpleProducer();
 		
-		for(int ca : listCategories) {
+		// cate 1999
+		// cate 16x
+		for(int ca=0; ca<sizeOfCategory; ca++) {
+			int cate = listCategories.get(ca);
 			for(int pa=0; pa<300; pa++) {
-				parse.set(ca, pa);
-				List<Product> list;
+				parse.set(cate, pa);
+				List<Product> list = null;
 				try {
-					list = parse.getData().getListProducts();
+					if(parse.getData() != null) {
+						list = parse.getData().getListProducts();
+					}
 				} catch (IOException e) {
+					Thread.sleep(10); // sleep 10s if exception
 					continue;
 				}
 				
+				if(list.size() == 0 || list == null) break;
 				
 				producer.open();
 				for(Product product : list) {
-					product.setCategory(ca); // set category of product is URL when crawl
-					producer.send("hello-kafka", product);
+					product.setCategory(cate); // set category of product is URL when crawl
+					producer.send("tiki-read-data-1", product);
 				}
 				
-				System.out.println("DONE! category " + ca + " page " + pa + " total products is " + list.size());
+				System.out.println("DONE! number of category " + ca + " category " + cate + " page " + pa + " total products is " + list.size());
 			}
 		}
 	
